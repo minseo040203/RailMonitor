@@ -224,3 +224,5 @@ if __name__ == '__main__':
     analysis_thread = threading.Thread(target=run_video_analysis, daemon=True)
     analysis_thread.start()
     app.run(host='0.0.0.0', port=5000, use_reloader=False)
+
+    #김민서 바보
