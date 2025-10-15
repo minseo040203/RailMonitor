@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 대기 현황 대시보드</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>실시간 대기 현황 대시보드</h1>
+    </header>
+    <main class="dashboard-container">
+        <div class="video-panel">
+            <h2>현장 비디오</h2>
+            <img src="http://127.0.0.1:5000/video_feed" alt="Live Video Feed">
+        </div>
+        <div class="status-panel">
+            <h2>대기 현황</h2>
+            
+            <div class="queue-display">
+                <p class="queue-title">현재 대기 인원</p>
+                <div class="queue-count-wrapper">
+                    <span id="queue-count" class="queue-count-number">0</span>
+                    <span class="queue-count-unit">명</span>
+                </div>
+            </div>
+
+            <div id="status-card" class="status-card">
+                <p id="status-message" class="status-message">
+                    <span id="status-icon" class="status-icon">🔄</span>
+                    <span id="status-text">서버 연결 대기 중...</span>
+                </p>
+            </div>
+
+            <div class="update-info">
+                <p>최근 업데이트: <span id="last-updated">--:--:--</span></p>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
