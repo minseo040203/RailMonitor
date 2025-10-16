@@ -1,0 +1,5 @@
+# 영상 파일과 결과물 디렉토리는 버전 관리에서 제외
+*.mp4
+*.avi
+output_polygon_queue/
+output_waiting_counter/
