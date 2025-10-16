@@ -24,34 +24,70 @@
             <div id="scroll-wrapper">
                 <main id="main-page" class="page active p-4">
                     <div class="card p-4 mb-4 bg-amber-50 border border-amber-200">
-                        <h3 class="text-md font-bold text-gray-800 mb-2 border-b pb-2">[ 실시간 서버 데이터 테스트 ]</h3>
-                        <div class="space-y-1 text-sm font-mono">
-                            <p><strong>화장실 테스트:</strong> <span id="live-restroom-data" class="font-bold text-blue-600">서버 연결 중...</span></p>
-                            <p><strong>좌석 테스트:</strong> <span id="live-seating-data" class="font-bold text-red-600">서버 연결 중...</span></p>
-                        </div>
-                    </div>
+  <h3 class="text-md font-bold text-gray-800 mb-2 border-b pb-2">[ 실시간 서버 데이터 테스트 ]</h3>
+  <div class="space-y-1 text-sm font-sans text-gray-700">
+    <p>
+      <strong class="font-semibold text-gray-800">화장실 테스트:</strong>
+      <span id="live-restroom-data" class="font-bold text-blue-600">서버 연결 중...</span>
+    </p>
+    <p>
+      <strong class="font-semibold text-gray-800">좌석 테스트:</strong>
+      <span id="live-seating-data" class="font-bold text-red-600">서버 연결 중...</span>
+    </p>
+  </div>
+</div>
+
                     <div class="mb-5 text-left"><h2 class="text-xl font-bold text-gray-800">편의시설 혼잡도 안내</h2><p class="text-gray-500 text-sm">부산역 편의시설의 실시간 혼잡도 정보입니다.</p></div>
                     <div id="navigate-seating" class="card card-clickable p-4 mb-4">
                         <div class="flex items-center">
                             <div class="p-3 bg-blue-50 rounded-full mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004d9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></div>
-                            <div class="flex-1"><h2 class="text-lg font-bold text-gray-800">좌석 현황</h2><p class="text-sm text-gray-500">층/구역별 좌석 정보를 확인하세요.</p></div>
+                            <div class="flex-1"><h2 class="text-lg font-bold text-gray-800">대기 좌석 현황</h2><p class="text-sm text-gray-500">층/구역별 좌석 정보를 확인하세요.</p></div>
                             <div class="text-right"><p id="avg-seating-status" class="text-lg font-bold"></p></div>
                         </div>
                     </div>
                     <div id="navigate-restroom" class="card card-clickable p-4">
-                         <div class="flex items-center mb-3">
-                            <div class="p-3 bg-green-50 rounded-full mr-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#27ae60">
-                                   <path d="M11.5 4v16h1V4h-1z"/><path d="M8 8a3 3 0 100-6 3 3 0 000 6zM4 10h8v11H4v-11z"/><path d="M16 8a3 3 0 100-6 3 3 0 000 6zM12.273 21h7.454l-2.727-9h-2L12.273 21z"/>
-                                </svg>
-                            </div>
-                            <div><h2 class="text-lg font-bold text-gray-800">화장실 현황</h2><p class="text-sm text-gray-500">가장 한산한 화장실을 이용하세요.</p></div>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-md text-sm"><span class="font-semibold text-blue-600">남자 화장실</span><span id="best-restroom-male" class="text-gray-700 font-medium"></span></div>
-                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-md text-sm"><span class="font-semibold text-red-500">여자 화장실</span><span id="best-restroom-female" class="text-gray-700 font-medium"></span></div>
-                        </div>
-                    </div>
+  <div class="flex items-center mb-3">
+    <div class="p-3 bg-green-50 rounded-full mr-4">
+      <!-- 남녀 화장실 픽토그램 SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 240 240">
+        <!-- 남자 -->
+        <circle cx="70" cy="45" r="20" fill="#007bff"/>
+        <path d="M50 70 
+                 L50 140 
+                 L40 210 
+                 L60 210 
+                 L70 150 
+                 L80 210 
+                 L100 210 
+                 L90 140 
+                 L90 70 
+                 Z" fill="#007bff"/>
+
+        <!-- 여자 -->
+        <circle cx="170" cy="45" r="20" fill="#ff2b2b"/>
+        <path d="M150 70 L190 70 L210 140 L130 140 Z" fill="#ff2b2b"/>
+        <rect x="154" y="140" width="12" height="70" fill="#ff2b2b"/>
+        <rect x="174" y="140" width="12" height="70" fill="#ff2b2b"/>
+      </svg>
+    </div>
+    <div>
+      <h2 class="text-lg font-bold text-gray-800">화장실 현황</h2>
+      <p class="text-sm text-gray-500">가장 한산한 화장실을 이용하세요.</p>
+    </div>
+  </div>
+
+  <div class="space-y-2">
+    <div class="flex justify-between items-center bg-gray-50 p-2 rounded-md text-sm">
+      <span class="font-semibold text-blue-600">남자 화장실</span>
+      <span id="best-restroom-male" class="text-gray-700 font-medium"></span>
+    </div>
+    <div class="flex justify-between items-center bg-gray-50 p-2 rounded-md text-sm">
+      <span class="font-semibold text-red-500">여자 화장실</span>
+      <span id="best-restroom-female" class="text-gray-700 font-medium"></span>
+    </div>
+  </div>
+</div>
+
                 </main>
     
                 <div id="seating-page" class="page p-4"><div id="seating-details-container" class="space-y-3"></div></div>

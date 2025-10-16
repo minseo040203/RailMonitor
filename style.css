@@ -3,8 +3,8 @@ body {
     -webkit-user-select: none; user-select: none;
     background-color: #e5e7eb; 
 }
-.korail-blue { background-color: #004d9e; }
-.korail-blue-text { color: #004d9e; }
+.korail-blue { background-color: #005bac; }
+.korail-blue-text { color: #005bac; }
 .congestion-smooth { color: #2ecc71; }
 .congestion-moderate { color: #f1c40f; }
 .congestion-crowded { color: #e74c3c; }

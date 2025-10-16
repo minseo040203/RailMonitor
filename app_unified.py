@@ -6,7 +6,7 @@
 #결과값을 계속 내주는 방향으로 바꿔야함.
 #지금은 임시로 mp4영상 무한 재생으로 해결했음.
 
-#지금까지 만든 것들 하나로 싹다 모은 파일임. 즉 지금 띄워둔 4가지 파일만 있으면 다 돌아감. 실행해볼게
+#지금까지 만든 것들 하나로 싹다 모은 파일임. 즉 지금 띄워둔 4가지 파일만 있으면 다 돌아감.
 
 # --- 1. 필요한 모든 라이브러리 임포트 ---
 import cv2
@@ -147,7 +147,7 @@ def run_seating_analysis():
     # (설정 변수들은 이전과 동일)
     VIDEO_FILE = "seatcount2.mp4"
     TOTAL_SEATS = 14
-    ROI_POLYGON = np.array([[140, 140], [600, 110], [1586, 442], [1581, 998], [549, 1045]], np.int32)
+    ROI_POLYGON = np.array([[140, 110], [600, 100], [1586, 442], [1581, 998], [549, 1045]], np.int32)
     MODEL_NAME = 'yolov8n.pt'
     TARGET_FPS_ANALYSIS = 1.0
     MIN_WAIT_TIME_SECONDS = 3.0
