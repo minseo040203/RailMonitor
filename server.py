@@ -225,4 +225,4 @@ if __name__ == '__main__':
     analysis_thread.start()
     app.run(host='0.0.0.0', port=5000, use_reloader=False)
 
-    #김민서 바보
+    #김철호 브랜치.
