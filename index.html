@@ -3,60 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부산역 실시간 혼잡도 서비스</title>
+    <title>코레일톡</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
 </head>
 <body class="bg-gray-200">
 
-    <div id="main-layout-container">
-        <div id="app-container" class="max-w-md bg-slate-50 shadow-2xl">
+    <div class="bg-gray-200 min-h-screen flex justify-center items-center p-0 sm:p-4">
+        <div id="app-container" class="w-full max-w-md h-screen sm:h-[90vh] sm:max-h-[800px] bg-gray-100 flex flex-col shadow-2xl sm:rounded-3xl overflow-hidden">
             
-            <header class="korail-blue text-white p-4 flex items-center justify-between sticky top-0 z-20 shadow-md">
-                <button id="back-button" class="hidden text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <header id="main-header" style="background-color: #042e63;" class="text-white p-3 flex items-center justify-between flex-shrink-0">
+                 <svg class="w-6 h-6" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                 <h1 class="text-2xl font-bold tracking-wider">KORAIL</h1>
+                 <div class="flex items-center space-x-3">
+                    <div class="border border-white rounded-md px-1 py-0.5 text-sm flex items-center">A<span class="text-xs">文</span></div>
+                    <svg class="w-7 h-7" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg>
+                 </div>
+            </header>
+            <header id="congestion-header" class="korail-blue text-white p-4 flex items-center justify-between sticky top-0 z-20 shadow-md flex-shrink-0 hidden">
+                <button id="back-button" class="text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
                 <h1 id="header-title" class="text-xl font-bold text-center w-full">부산역 이용 현황</h1>
                 <div class="w-6 h-6"></div>
             </header>
 
-            <div id="scroll-wrapper">
-                <main id="main-page" class="page active p-4">
-                    <div class="card p-4 mb-4 bg-amber-50 border border-amber-200">
-                        <h3 class="text-md font-bold text-gray-800 mb-2 border-b pb-2">[ 실시간 서버 데이터 테스트 ]</h3>
-                        <div class="space-y-1 text-sm font-mono">
-                            <p><strong>화장실 테스트:</strong> <span id="live-restroom-data" class="font-bold text-blue-600">서버 연결 중...</span></p>
-                            <p><strong>좌석 테스트:</strong> <span id="live-seating-data" class="font-bold text-red-600">서버 연결 중...</span></p>
+            <main class="flex-grow overflow-y-auto">
+                <div id="home-page" class="page active p-4 bg-gray-100">
+                    <div class="bg-white rounded-lg shadow-lg p-5">
+                        <div class="flex justify-between items-center border-b pb-3 mb-4">
+                          <h2 class="text-lg font-bold text-gray-800">승차권 예매</h2>
+                          <div class="flex items-center space-x-2">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded" />
+                            <span class="text-gray-700">왕복</span>
+                            <button class="text-gray-500">⋮</button>
+                          </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                          <div class="text-center">
+                            <span class="text-sm text-gray-500">출발</span>
+                            <p class="text-3xl font-bold text-gray-800">부산</p>
+                          </div>
+                          <div class="flex items-center">
+                            <button class="p-2 border rounded-full text-blue-600 border-blue-400">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+                            </button>
+                          </div>
+                          <div class="text-center">
+                            <span class="text-sm text-gray-500">도착</span>
+                            <p class="text-3xl font-bold text-gray-800">경주</p>
+                          </div>
+                        </div>
+                        <div class="space-y-3 text-left mb-5">
+                          <div class="flex justify-between items-center">
+                            <div><p class="text-xs text-blue-600">가는날</p><p id="departure-date" class="text-gray-800">2025년 10월 30일 (목) 13:14</p></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                          </div>
+                          <div class="flex justify-between items-center">
+                            <div><p class="text-xs text-blue-600">인원선택</p><p class="text-gray-800">어른 1명</p></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                          </div>
+                        </div>
+                        <div class="flex bg-gray-200 rounded-lg overflow-hidden">
+                            <button class="flex-1 py-3 text-center text-gray-800 font-semibold">간편구매</button>
+                            <div class="w-px bg-gray-300"></div>
+                            <button class="flex-1 py-3 text-center text-[#005bac] font-semibold">열차조회</button>
                         </div>
                     </div>
-                    <div class="mb-5 text-left"><h2 class="text-xl font-bold text-gray-800">편의시설 혼잡도 안내</h2><p class="text-gray-500 text-sm">부산역 편의시설의 실시간 혼잡도 정보입니다.</p></div>
-                    <div id="navigate-seating" class="card card-clickable p-4 mb-4">
-                        <div class="flex items-center">
-                            <div class="p-3 bg-blue-50 rounded-full mr-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#004d9e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></div>
-                            <div class="flex-1"><h2 class="text-lg font-bold text-gray-800">좌석 현황</h2><p class="text-sm text-gray-500">층/구역별 좌석 정보를 확인하세요.</p></div>
-                            <div class="text-right"><p id="avg-seating-status" class="text-lg font-bold"></p></div>
-                        </div>
+                    <div class="mt-6">
+                        <h3 class="text-md font-semibold text-gray-700 mb-3">이런 서비스는 어떠세요?</h3>
+                        <div id="service-grid" class="bg-white rounded-lg shadow-lg p-4 grid grid-cols-4 gap-y-4 text-center"></div>
                     </div>
-                    <div id="navigate-restroom" class="card card-clickable p-4">
-                         <div class="flex items-center mb-3">
-                            <div class="p-3 bg-green-50 rounded-full mr-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#27ae60">
-                                   <path d="M11.5 4v16h1V4h-1z"/><path d="M8 8a3 3 0 100-6 3 3 0 000 6zM4 10h8v11H4v-11z"/><path d="M16 8a3 3 0 100-6 3 3 0 000 6zM12.273 21h7.454l-2.727-9h-2L12.273 21z"/>
-                                </svg>
-                            </div>
-                            <div><h2 class="text-lg font-bold text-gray-800">화장실 현황</h2><p class="text-sm text-gray-500">가장 한산한 화장실을 이용하세요.</p></div>
-                        </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-md text-sm"><span class="font-semibold text-blue-600">남자 화장실</span><span id="best-restroom-male" class="text-gray-700 font-medium"></span></div>
-                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded-md text-sm"><span class="font-semibold text-red-500">여자 화장실</span><span id="best-restroom-female" class="text-gray-700 font-medium"></span></div>
-                        </div>
+                </div>
+                
+                <div id="congestion-page" class="page hidden p-4 bg-gray-200">
+                    <div id="congestion-main-content"></div>
+                    <div id="seating-details-container" class="space-y-3"></div>
+                    <div id="restroom-details-container" class="space-y-3"></div>
+                </div>
+                
+                <div id="ticket-page" class="page hidden bg-gray-100">
                     </div>
                 </main>
-    
-                <div id="seating-page" class="page p-4"><div id="seating-details-container" class="space-y-3"></div></div>
-                <div id="restroom-page" class="page p-4"><div id="restroom-details-container" class="space-y-3"></div></div>
-            </div>
+            
+            <footer id="bottom-nav" class="bg-white border-t border-gray-200 flex justify-around text-xs text-gray-500 py-2 flex-shrink-0"></footer>
 
             <div id="map-modal" class="hidden absolute inset-0 bg-black bg-opacity-60 z-40 flex justify-center items-center p-4">
                 <div class="bg-white rounded-lg w-full max-w-md shadow-xl overflow-hidden">
@@ -65,29 +107,11 @@
                         <svg viewBox="0 0 350 250" class="w-full rounded-md border bg-white">
                             <defs><style>.label{font-size:8px;font-family:sans-serif;fill:#333;}.exit{font-size:7px;fill:#555;}.floor-label{font-size:14px;font-weight:bold;fill:#004d9e;}</style></defs>
                             <path d="M 30 10 H 220 V 30 L 210 40 H 180 L 170 30 V 10 H 150 V 40 L 140 50 H 70 L 60 40 V 10 Z" fill="#e3f2fd" stroke="#90caf9"/><path d="M 230 10 H 320 V 110 H 230 Z" fill="#e3f2fd" stroke="#90caf9"/><text x="15" y="60" class="floor-label">2층</text><rect x="250" y="30" width="50" height="40" fill="#bbdefb"/><text x="260" y="55" class="label">바다맞이방</text><circle cx="95" cy="70" r="10" fill="#fff" stroke="#42a5f5"/><text x="93" y="73" font-size="10px" font-weight="bold" fill="#42a5f5">i</text><text x="85" y="90" class="label">종합안내</text><text x="235" y="80" class="label">철도경찰대</text><text x="35" y="20" class="exit">8번 출구</text><text x="205" y="20" class="exit">9번 출구</text><path d="M 10 130 L 50 130 L 60 140 H 100 L 110 130 H 240 L 250 140 H 290 L 300 130 L 340 130 V 240 H 10 Z" fill="#f1f8e9" stroke="#a5d6a7"/><text x="15" y="190" class="floor-label">1층</text><text x="310" y="145" class="exit">1번 출구</text><text x="255" y="155" class="exit">2번 출구</text><text x="170" y="155" class="exit">3,4번 출구</text><text x="110" y="155" class="exit">5번 출구</text><text x="55" y="155" class="exit">6번 출구</text><text x="120" y="230" class="exit">7번 출구</text>
-                            <circle id="dot-loc1" class="location-dot" cx="315" cy="160" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/><circle id="dot-loc2" class="location-dot" cx="40" cy="160" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/><circle id="dot-loc3" class="location-dot" cx="50" cy="40" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/><circle id="dot-loc4" class="location-dot" cx="290" y="90" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/>
+                            <circle id="dot-loc1" class="location-dot" cx="315" cy="160" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/><circle id="dot-loc2" class="location-dot" cx="40" cy="160" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/><circle id="dot-loc3" class="location-dot" cx="50" cy="40" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/><circle id="dot-loc4" class="location-dot" cx="290" cy="90" r="5" fill="#e53935" stroke="white" stroke-width="1.5" style="display:none;"/>
                         </svg>
                     </div>
-                     <div class="p-3 bg-gray-50 text-right"><button onclick="closeMap()" class="bg-korail-blue text-white px-4 py-2 rounded-md text-sm font-semibold">닫기</button></div>
+                     <div class="p-3 bg-gray-100 text-right"><button id="close-map-button" class="korail-blue text-white px-4 py-2 rounded-md text-sm font-semibold">닫기</button></div>
                 </div>
-            </div>
-            
-            <footer class="z-30 bg-white border-t border-gray-200 flex justify-around text-xs text-gray-500 py-2">
-                <div class="text-center korail-blue-text"><svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg><span class="font-bold">홈</span></div>
-                <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg><span>혜택・정기권</span></div>
-                <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg><span>여행상품・패스</span></div>
-                <div class="text-center"><svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg><span>나의티켓</span></div>
-            </footer>
-        </div>
-
-        <div id="stream-container" class="space-y-4">
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <h2 class="text-lg font-bold text-center p-2 bg-gray-800 text-white">실시간 화장실 분석</h2>
-                <img src="http://127.0.0.1:5000/video_feed_restroom" alt="Restroom Analysis Feed" class="w-full">
-            </div>
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <h2 class="text-lg font-bold text-center p-2 bg-gray-800 text-white">실시간 좌석 분석</h2>
-                <img src="http://127.0.0.1:5000/video_feed_seating" alt="Seating Analysis Feed" class="w-full">
             </div>
         </div>
     </div>

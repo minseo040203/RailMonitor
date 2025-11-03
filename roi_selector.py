@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 # --- 설정 ---
-VIDEO_FILE = "toilet_line.mp4" # 좌표를 찾을 영상 파일
+VIDEO_FILE = "ai좌석영상.mp4" # 좌표를 찾을 영상 파일
 MAX_DISPLAY_WIDTH = 1280       # 화면에 표시될 창의 최대 가로 크기 (px)
 # ------------
 
